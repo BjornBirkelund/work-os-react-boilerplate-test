@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import { useAuth } from "@workos-inc/authkit-react";
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+        const { user, getAccessToken, isLoading, signIn, signUp, signOut } =
+                useAuth();
+        if (isLoading) {
+                return <span>loading...</span>;
+        }
+
+        const performMutation = async () => {
+                const accessToken = await getAccessToken();
+                console.log("api request with accessToken", accessToken);
+        };
+
+        console.log({ user });
+        if (user) {
+                return (
+                        <div>
+                                Hello, {user.email}
+                                <p>
+                                        <button
+                                                onClick={() => {
+                                                        performMutation();
+                                                }}
+                                        >
+                                                Make API Request
+                                        </button>
+                                </p>
+                                <p>
+                                        <button onClick={() => signOut()}>
+                                                Sign out
+                                        </button>
+                                </p>
+                        </div>
+                );
+        }
+
+        return (
+                <>
+                        <button onClick={() => signIn()}>Sign in</button>{" "}
+                        <button onClick={() => signUp()}>Sign up</button>
+                </>
+        );
 }
 
 export default App;
