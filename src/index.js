@@ -9,8 +9,10 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
         <React.StrictMode>
                 <AuthKitProvider
-                        clientId="client_01J4Q0J2F830SXK60KBGG9WP9Z"
-                        redirectUri="http://localhost:3002/"
+                        // clientId="client_01J4Q0J2F830SXK60KBGG9WP9Z"
+                        clientId="client_01J4Q0J2NYCFEPTYZR2W4GV4NC"
+                        apiHostname="auth.filot.ai"
+                        redirectUri="https://workos-react.filot.ai/"
                         // apiHostname="auth.example.com"
                 >
                         <App />
